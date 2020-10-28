@@ -1,0 +1,47 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import sys
+from datetime import datetime
+mailer = []
+with open("Mailler","r",encoding="utf-8") as file:
+    liste = file.readlines()
+    file.close()
+
+for i in liste:
+    i = str(i)
+    i = i.strip("\n")
+    mailer.append(i)
+
+for i in mailer:
+    mesaj = MIMEMultipart()
+
+    mesaj["From"] = "dariyan.ozcelik@gmail.com"
+    mesaj["To"] = i
+    mesaj["Subject"] = "Bu Bir Toplu Maildir..."
+
+
+    yazı  ="""
+    
+    Herkese Selamın Ello
+    
+    Saygılarımla,
+    Dariyan Özçelik
+    """
+
+    gövde = MIMEText(yazı,"plain")
+
+    mesaj.attach(gövde)
+
+    try:
+
+        mail = smtplib.SMTP("smtp.gmail.com",587)
+        mail.ehlo()
+        mail.starttls()
+        mail.login("dariyan.ozcelik@gmail.com","daligris123")
+        mail.sendmail(mesaj["From"],mesaj["To"],mesaj.as_string())
+
+        print("Mailler Gönderilmiştir...")
+    except:
+        sys.stderr.write("Mailler gönderilemedi....")
+        sys.stderr.flush()
