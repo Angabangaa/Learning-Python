@@ -1,0 +1,56 @@
+rom Proje1 import *
+
+
+
+print("""*************************
+
+Şarkı Programı
+
+1.Şarkıları Gör
+2.Şarkı Ekle
+3.Şarkı Sorgula
+4.Şarkı Sil
+
+
+Çıkış Yapmak için q'ya bas.....
+
+
+*************************
+""")
+
+koleksiyon = Koleksiyon()
+
+while True:
+    işlem = input("İşlem Seçiniz:")
+
+    if işlem == "q":
+        print("Program kapatılıyor....")
+        break
+    elif işlem == "1":
+        print("Takımlar Yükleniyor...")
+        time.sleep(2)
+        koleksiyon.şarkıları_gör()
+    elif işlem == "2":
+        isim = input("İsim:")
+        tür = input("Tür:")
+        zaman = input("Zaman:")
+        tarih = input("Tarih:")
+        print("Şarkı Ekleniyor....")
+        time.sleep(2)
+        koleksiyon.şarkı_ekle(Şarkı(isim,tür,zaman,tarih))
+        print("Şarkı Eklendi....")
+    elif işlem == "3":
+        isim = input("İsim Yazınız:")
+        koleksiyon.şarkı_sorgula(isim)
+
+    elif işlem == "4":
+        isim = input("Bir İsim Giriniz:")
+        sure = input("Are you sure (Y/N):")
+        time.sleep(2)
+        if sure == "Y" or sure == "y":
+            koleksiyon.şarkı_sil(isim)
+            print("Şarkı Silinmiştir......")
+        else:
+            print("Şarkıyı silmekten vazgeçtiniz....")
+    elif işlem == "5":
+        koleksiyon.şarkı_sürelerini_topla()
